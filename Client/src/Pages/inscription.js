@@ -11,11 +11,16 @@ import AccueilButton from '../Composants/AccueilBouton';
 import '../Composants/button.css'
 import InscriptionButton from '../Composants/InscriptionBouton';
 import ConnexionButton from '../Composants/ConnexionBouton';
+import { useNavigate } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
 
 function Inscription() {
 
   const [InscriptionReussie, setInscriptionReussie] = useState(false);
   const [messageClient, setmessageClient] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
+  const navigate=useNavigate();
+  const [alert, setAlert] = useState(false);
   const [data,setData]=useState({
     "name":"",
     "email":"",
@@ -60,6 +65,16 @@ function Inscription() {
         setmessageClient(data.message);
         if(data.inscription){
           setInscriptionReussie(true);
+          navigate("/connexion")
+        }
+        else{
+          setAlert(data.message);
+        setShowAlert(true);
+      setTimeout(() => {
+        navigate("/inscription");
+          setShowAlert(false);
+
+        }, 3000);
         }
       })
       .catch(error => console.error(error));
@@ -79,17 +94,9 @@ function Inscription() {
        <div className='stuck'>
         <h2 style={{textAlign:'center'}}>Inscriptions</h2>
     <div class="formulaire">
-      
-    { InscriptionReussie ?
-     (
-       <>
-        <div className='middle_print'>
-           {messageClient}
-        </div>
-      </> 
-     ) :
+   
 
-    (<form onSubmit={(e)=>{handlesubmit(e)}} id="inscription-form">
+    <form onSubmit={(e)=>{handlesubmit(e)}} id="inscription-form">
       <div className="form-group">
         <label for="name">Name:</label>
         <input type="text" onChange={(e)=>{handlechange(e)}} value={data.name} className="form-control" id="name" name="user_name" placeholder="Entrez votre nom"/>
@@ -111,13 +118,19 @@ function Inscription() {
       <input type="submit" value="Submit"/>
 
      
-    </form>)
-  } 
+
+    </form>
+    {showAlert && (
+      <Alert style={{position:'absolute',top:55 + 'vh'}}variant="success" onClose={() => setShowAlert(false)} dismissible className="my-3">
+              {alert}
+      </Alert>
+  )}
+  
     
     </div>
     </div>
   </motion.div>
-  {errorMessage && <p>{errorMessage}</p>}
+  
   <div className='AccueilButton'>
                 <AccueilButton></AccueilButton>
     </div>

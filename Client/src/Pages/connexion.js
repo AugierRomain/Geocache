@@ -16,8 +16,12 @@ import AccueilButton from '../Composants/AccueilBouton';
 import '../Composants/button.css'
 import InscriptionButton from '../Composants/InscriptionBouton';
 import ConnexionButton from '../Composants/ConnexionBouton';
+import { Alert } from 'react-bootstrap';
 function Connexion() {
+  const [showAlert, setShowAlert] = useState(false);
+  const [alert, setAlert] = useState(false);
   const {isAuthenticated, SetisAuthenticated} = useContext(Auth);
+  const [ConnexionReussie, setConnexionReussie] = useState(false);
   const [data,setData]=useState({
     "email":"",
     "password":""
@@ -105,10 +109,24 @@ function Connexion() {
     }
 
     if(localStorage.getItem('token')  && !data.authenticated ){
-      navigate("/connexion",{ state: { errorMessage: data.message} } );
+      setAlert(data.message);
+      setShowAlert(true);
+      setTimeout(() => {
+        navigate("/connexion");
+          setShowAlert(false);
+
+        }, 3000);
+    // navigate("/connexion",{ state: { errorMessage: data.message} } );
     }
     if(data.non_connect){
-      navigate("/connexion",{ state: { errorMessage: `${data.message}, cliquer sur le bouton pour vous inscrire si vous  ne posséder pas de compte ou reconnectez-vous` } });
+      setAlert(data.message);
+      setShowAlert(true);
+      setTimeout(() => {
+        navigate("/connexion");
+          setShowAlert(false);
+
+        }, 3000);
+      //navigate("/connexion",{ state: { errorMessage: `${data.message}, cliquer sur le bouton pour vous inscrire si vous  ne posséder pas de compte ou reconnectez-vous` } });
     }
     
   })
@@ -145,7 +163,8 @@ function Connexion() {
     <div className='stuck'>
     <h2 style={{textAlign:'center'}}>Connexion</h2>
     <div class="formulaire">
-  
+   
+
     <form onSubmit={(e)=>handlesubmit(e)} id="connexion-form">
     
       
@@ -166,8 +185,14 @@ function Connexion() {
 
       <br/>
       <input  type="submit" value="Submit"/>
+
     </form>
-    {errorMessage && <p>{errorMessage}</p>}
+    
+    {showAlert && (
+                <Alert style={{position:'absolute',top:50 + 'vh'}}variant="success" onClose={() => setShowAlert(false)} dismissible className="my-3">
+                        {alert}
+                </Alert>
+            )}
     </div>
     </div>
   </motion.div>

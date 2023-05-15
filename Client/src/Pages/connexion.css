@@ -144,5 +144,10 @@ header {
     transform: translateX(-50%);
   }
   
-
+.error{
+  position:absolute;
+  top:70vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
   
