@@ -1,0 +1,134 @@
+body {
+    font-family: sans-serif;
+    background-color: #f2f2f2;
+  }
+
+/* bouton de retout */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px;
+}
+
+.back-button {
+  color: #fff;
+  background-color: #f44336;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.back-button:hover {
+  background-color: #d32f2f;
+}
+
+/***************************/
+
+  form {
+    width: 300px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-container {
+    margin: 50px auto;
+    max-width: 500px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+  }
+  
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="email"],
+  input[type="text"] {
+    width: 50%;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  button[type="submit"] {
+    background-color: #008CBA;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0077B5;
+  }
+
+  .form-control {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #6cb2eb;
+    box-shadow: 0 0 10px #6cb2eb;
+  }
+  .formulaire{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0vh;
+    
+  }
+
+  .button_div{
+    height:15vh;
+    
+  }
+  .stuck{
+    position: absolute;
+    top: 15vh;
+    bottom: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .middle_print{
+    position: absolute;
+    top: 30vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width:50vh;
+  }
+  
+
+  

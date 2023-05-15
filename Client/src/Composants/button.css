@@ -1,0 +1,40 @@
+.AddButton{
+    position: absolute;
+    z-index: 9999; /* Valeur du z-index élevée */
+    left: 50%; /* Centrage horizontal */
+    top: 75%; /* Positionnement à 75% de la hauteur de la page */
+    transform: translateX(-50%); /* Centrage vertical */
+  
+  }
+  .AccueilButton{
+    position: absolute;
+    z-index: 9999; /* Valeur du z-index élevée */
+    left: 20%; /* Centrage horizontal */
+    top: 90%; /* Positionnement à 75% de la hauteur de la page */
+    transform: translateX(-50%); /* Centrage vertical */
+  
+  }
+  .ConnexionButton{
+    position: absolute;
+    z-index: 9999; /* Valeur du z-index élevée */
+    left: 40%; /* Centrage horizontal */
+    top: 90%; /* Positionnement à 75% de la hauteur de la page */
+    transform: translateX(-50%); /* Centrage vertical */
+  
+  }
+  .InscriptionButton{
+    position: absolute;
+    z-index: 9999; /* Valeur du z-index élevée */
+    left: 60%; /* Centrage horizontal */
+    top: 90%; /* Positionnement à 75% de la hauteur de la page */
+    transform: translateX(-50%); /* Centrage vertical */
+  
+  }
+  .MapButton{
+    position: absolute;
+    z-index: 9999; /* Valeur du z-index élevée */
+    left: 80%; /* Centrage horizontal */
+    top: 90%; /* Positionnement à 75% de la hauteur de la page */
+    transform: translateX(-50%); /* Centrage vertical */
+
+}

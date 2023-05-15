@@ -1,0 +1,71 @@
+/* Mise en forme du corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #d5d3d2;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  h1 {
+    text-align: center;
+  }
+
+  /* Mise en forme de l'en-tête */
+  header {
+    background-color: #951616;
+    color: white;
+    padding: 10px;
+    text-align:center
+  }
+
+  /* Mise en forme du contenu principal */
+  main {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Mise en forme des boutons */
+  button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background-color: #666;
+  }
+
+  .container {
+    position: relative; /* Pour que les éléments positionnés absolument soient relatifs à ce conteneur */
+    min-height: 92vh; /* Pour que le conteneur ait une hauteur minimale égale à la hauteur de la fenêtre */
+  }
+  
+  .centered-div {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Pour centrer la div horizontalement et verticalement */
+  }
+  
+  .bottom-div {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center; /* Aligner le contenu au centre */
+  }
+  .middle-div{
+    position:absolute;
+    top:70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
