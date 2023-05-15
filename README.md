@@ -7,6 +7,13 @@ PG219 - Projet de Geocache de Télécommunications spécialité informatique.
     Ali Koffi
     Augier Romain
 
+## Contributions de Ali Koffi
+    Une très grande partie du back-end : gestion des connexions, inscriptions, token, d'ajout des caches, de modifications.
+
+## Contributions
+    En back end : affichage des points et de la carte.  
+    Une très grande partie du front end : Navbar, boutons fixes, affichage adaptatif à la taille de l'écran, différenciation entre caches personnelles et autres caches.
+
 ## Commandes à lancer pour le coté serveur.
 
 npm init
