@@ -16,7 +16,7 @@ PG219 - Projet de Geocache de Télécommunications spécialité informatique.
 
 ## Commandes à lancer pour le coté serveur.
 
-npm init
+    npm init
 	npm install body-parser
     	npm install cookie-parser
     	npm install cookies
