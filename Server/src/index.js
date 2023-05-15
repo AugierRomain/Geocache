@@ -116,7 +116,7 @@ const database_pg209="db_pg209";
 const url = 'mongodb://0.0.0.0:27017';
 const password=" Go5dYAYQwsYz9fGx";
 const uri="mongodb+srv://alikoffianselme2002:Go5dYAYQwsYz9fGx@cluster0.bytjm1m.mongodb.net/?retryWrites=true&w=majority";
-MongoClient.connect(uri).
+MongoClient.connect(url).
     then(function(client) {
   //if (err) throw err;
  // if (err) console.log(err);
@@ -271,7 +271,7 @@ then(  (products) =>{
 
 
     /** requête geocache   **/
-    MongoClient.connect(uri).
+    MongoClient.connect(url).
     then(function(client) {
   //if (err) throw err;
  // if (err) console.log(err);
