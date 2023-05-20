@@ -1,0 +1,535 @@
+openapi: 3.0.3
+info:
+  title: ApiRest Augier Ali
+  version: 1.0.11
+tags:
+  - name: inscription
+paths:
+  /inscription:
+    post:
+      tags:
+        - inscription
+      summary: Inscription d'un nouvel utilisateur
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inscription'
+        required: true
+      responses:
+        '200':
+          description: Inscription Reussie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InscriptionReussie'          
+        '201':
+          description: Inscription Ratée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InscriptionRatee'          
+  /connexion:
+    post:
+      tags:
+        - connexion
+      summary: Connexion d'un utilisateur, le token est un objet de type token et non une chaine de caractère.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Connexion'
+        required: true
+      responses:
+        '200':
+          description: Connexion Reussie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsertValid'          
+        '201':
+          description: Connexion Ratée, le message envoyé permet à l'utilisateur de récupérer le token, il n'a pas besoin de se reconnecter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnexionRatee'
+        '202':
+          description: Connexion Ratéele message envoyé permet à l'utilisateur de récupérer le token, il n'a pas besoin de se reconnecter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnexionRatee'           
+    
+  /ma-page-protegee:
+    post:
+      tags:
+        - Gestion des tokens
+      summary: Gestion des tokens
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Protected'
+        required: true
+      responses:
+        '200':
+          description: Connexion Reussie, le token est toujours présent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProtectedResponse'          
+        '201':
+          description: Chargement raté, le token a expiré
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProtectedResponse2'          
+      
+  /geocaches:
+    post:
+      tags:
+        - geocaches
+      summary: L'utilisateur récupère les géocaches autour de lui 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Geocache'
+        required: true
+      responses:
+        '200':
+          description: La réponse renvoit un fichier json avec toutes les géocaches autour de la personne, mais je ne vois pas comment l'écrire avec swagger.                  
+      
+  /insert_geocaches:
+    post:
+      tags:
+        - geocaches
+      summary: L'utilisateur ajoute une géocache 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeocacheInsert'
+        required: true
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsertValid'
+        '201':
+          description: échec
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsertNotValid'
+  /modify_geocaches:
+    post:
+      tags:
+        - geocaches
+      summary: L'utilisateur modifie une géocache 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyGeocache'
+        required: true
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyGood'
+        '201':
+          description: échec
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyWrong'
+  /remove_geocaches:
+    post:
+      tags:
+        - geocaches
+      summary: L'utilisateur supprime une géocache 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveGeocache'
+        required: true
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveGood'
+        '201':
+          description: échec
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveWrong'
+  /found_geocaches:
+    post:
+      tags:
+        - geocaches
+      summary: L'utilisateur indique qu'il a trouvé une geocache 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoundGeocache'
+        required: true
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoundGood'
+        
+components:
+  schemas:
+    Inscription:
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+          example: doggie
+        email:
+          type: string
+          example: doggie@gmail.com
+        password:
+          type: string
+          example: doggie123    
+      xml:
+        name: Inscription
+    InscriptionRatee:
+      required:
+        - message
+        - inscription
+      type: object
+      properties:
+        message :
+          type: string
+          example: Vous avez saisi doggie@gmail.com, mais ce mail existe déjà
+        inscription :
+          type: boolean
+          example : false    
+    InscriptionReussie:
+      required:
+        - message
+      type: object
+      properties:
+        message :
+          type: string
+          example: Inscription reussie Mr doggie, veuillez-vous connecter.
+        inscription :
+          type: boolean
+          example : true 
+    Protected:
+      required:
+        - authorization
+        - session_token
+        - sessionID
+      type: object
+      properties:
+        authorization :
+          type: object
+          example: Token
+        session_token :
+          type: object
+          example: Token 
+        sessionId:
+          type: integer
+          example: 7   
+    ProtectedResponse:
+      required:
+        - message
+        - access
+      type: object
+      properties:
+        message :
+          type: string
+          example: Vous avez réussie à acceder à la page protégée doggie@gmail.com
+        access :
+          type: boolean
+          example: true
+    ProtectedResponse2:
+      required:
+        - message
+        - access
+      type: object
+      properties:
+        message :
+          type: string
+          example: Votre token est expiré, reconnectez-vous
+        access :
+          type: boolean
+          example: false       
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+    Connexion:
+      required:
+        - email
+        - password
+        - authorization
+      type: object
+      properties:
+        email:
+          type: string
+          example: doggie@gmail.com
+        password:
+          type: string
+          example: doggie123  
+        authorization:
+          type: object
+          example: Token  
+    ConnexionReussie:
+      required:
+        - message
+        - authenticated
+        - id
+      type: object
+      properties:
+        message:
+          type: string
+          example: Vous êtes déjà connecté Mr doggie@gmail.com
+        authenticated:
+          type: boolean
+          example: true 
+        id:
+          type: integer
+          example: 7
+    ConnexionRatee:
+      required:
+        - message
+        - authenticated
+        - token
+      type: object
+      properties:
+        message:
+          type: string
+          example: Vous n'êtes pas authentifié Mr doggie@gmail.com, reconnectez vous
+        authenticated:
+          type: boolean
+          example: false
+        token:
+          type: object
+          example: Token
+    ConnexionRatee2:
+      required:
+        - message
+        - token
+      type: object
+      properties:
+        message:
+          type: string
+          example: Votre token a expiré, reconnectez-vous
+        token:
+          type: object
+          example: Token
+    Geocache:
+      required:
+        - longitude
+        - latitude
+      type: object
+      properties:
+        longitude:
+          type: integer
+          example: 40.060512
+        latitude:
+          type: integer
+          example: -0.547896  
+    GeocacheInsert:
+      required:
+        - longitude
+        - lattitude
+        - id
+        - difficulty
+      type: object
+      properties:
+        longitude:
+          type: integer
+          example: 40.060512
+        latitude:
+          type: integer
+          example: -0.547896  
+        id :
+          type: integer
+          example : 7
+        difficulty :
+          type: integer
+          example : 2
+    InsertValid:
+      required:
+        - message
+      type: object
+      properties:
+        message: 
+          type: string
+          example: une géocache a été insérée avec succès
+    InsertNotValid:
+      required:
+        - message
+      type: object
+      properties:
+        message: 
+          type: string
+          example: Erreur lors de la récupération du dernier ID 7
+    ModifyGeocache:
+      required:
+        - longitude
+        - latitude
+        - id
+        - id_modifyer
+        - description
+        - difficulty
+      type: object
+      properties:
+        longitude:
+          type: integer
+          example: 40.060512
+        latitude:
+          type: integer
+          example: -0.547896 
+        id:
+          type: integer
+          example: 7
+        id_modifyer:
+          type: integer
+          example: 7
+        description:
+          type: string
+          example: Dans les branches de l'arbre
+        difficulty:
+          type: integer
+          example: 3 
+    RemoveGeocache:
+      required:
+        - longitude
+        - latitude
+        - id
+        - id_modifyer
+        - description
+        - difficulty
+      type: object
+      properties:
+        longitude:
+          type: integer
+          example: 40.060512
+        latitude:
+          type: integer
+          example: -0.547896 
+        id:
+          type: integer
+          example: 7
+        id_modifyer:
+          type: integer
+          example: 7
+        description:
+          type: string
+          example: Dans les branches de l'arbre
+        difficulty:
+          type: integer
+          example: 3  
+    FoundGeocache:
+      required:
+        - longitude
+        - latitude
+        - id
+        - description
+      type: object
+      properties:
+        longitude:
+          type: integer
+          example: 40.060512
+        latitude:
+          type: integer
+          example: -0.547896 
+        id:
+          type: integer
+          example: 7
+        description:
+          type: string
+          example: Dans les branches de l'arbre
+    ModifyGood:
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          type: string
+          example: Votre modification a été un succès
+    ModifyWrong:
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          type: string
+          example: Impossible de modifier une cache dont on n'est pas propriétaire
+    RemoveGood:
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          type: string
+          example: la cache de description Dans les branches de l'arbre a été supprimée
+    RemoveWrong:
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          type: string
+          example: Impossible de supprimer cette cache car vous n'en êtes  pas propriétaire 
+    FoundGood:
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          type: string
+          example: doggie@gmail.com a trouvé la cache de description Dans les branches de l'arbre              
+  requestBodies:
+    Pet:
+      description: Pet object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Inscription'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Inscription'
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header                            
